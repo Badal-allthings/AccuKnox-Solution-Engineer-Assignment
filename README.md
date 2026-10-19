@@ -1,36 +1,36 @@
-\# AccuKnox Solution Engineer Trainee Assignment
+# AccuKnox Solution Engineer Trainee Assignment
 
-\## Problem Statement 2: Kubernetes Deployment and DVWA Security Testing
+## Problem Statement 2: Kubernetes Deployment and DVWA Security Testing
 
 
 
-\### 1. Objective
+### 1. Objective
 
 Deploy a local Kubernetes cluster, run Damn Vulnerable Web Application (DVWA), and demonstrate three common web application security vulnerabilities in an isolated lab environment.
 
 
 
-\### 2. Environment and Tools
+### 2. Environment and Tools
 
-\- Operating System: Windows 11
+- Operating System: Windows 11
 
-\- Container Runtime: Docker Desktop
+- Container Runtime: Docker Desktop
 
-\- Kubernetes: Minikube
+- Kubernetes: Minikube
 
-\- Application: DVWA (`vulnerables/web-dvwa`)
+- Application: DVWA (`vulnerables/web-dvwa`)
 
-\- Namespace: `dvwa-lab`
+- Namespace: `dvwa-lab`
 
-\- Deployment: `dvwa`
+- Deployment: `dvwa`
 
-\- Service: `dvwa` (ClusterIP)
+- Service: `dvwa` (ClusterIP)
 
-\- Local access: `http://127.0.0.1:8080`
+- Local access: `http://127.0.0.1:8080`
 
 
 
-\### 3. Kubernetes Setup
+### 3. Kubernetes Setup
 
 
 
@@ -98,69 +98,69 @@ Keep the port-forward terminal running and open `http://127.0.0.1:8080` in a bro
 
 
 
-\### 4. Security Demonstrations
+### 4. Security Demonstrations
 
 
 
-Testing was performed against the local DVWA instance with its security level set to \*\*Low\*\*.
+Testing was performed against the local DVWA instance with its security level set to **Low**.
 
 
 
-\#### Test 1: SQL Injection
+#### Test 1: SQL Injection
 
 
 
-\- \*\*Location:\*\* DVWA → SQL Injection
+- **Location:** DVWA → SQL Injection
 
-\- \*\*Test input:\*\* `1' OR '1'='1' #`
+- **Test input:** `1' OR '1'='1' #`
 
-\- \*\*Observation:\*\* The application returned multiple records rather than only the record expected for a normal ID lookup.
+- **Observation:** The application returned multiple records rather than only the record expected for a normal ID lookup.
 
-\- \*\*Security impact:\*\* Improperly constructed SQL queries can expose database records and, depending on the query and database permissions, enable further database manipulation.
+- **Security impact:** Improperly constructed SQL queries can expose database records and, depending on the query and database permissions, enable further database manipulation.
 
-\- \*\*Mitigation:\*\* Use parameterized queries or prepared statements, validate inputs on the server, apply least-privilege database permissions, and avoid exposing sensitive database errors.
+- **Mitigation:** Use parameterized queries or prepared statements, validate inputs on the server, apply least-privilege database permissions, and avoid exposing sensitive database errors.
 
-\- \*\*Evidence:\*\* `evidence/sql-injection.png`
-
-
-
-\#### Test 2: Reflected Cross-Site Scripting (XSS)
+- **Evidence:** `evidence/sql-injection.png`
 
 
 
-\- \*\*Location:\*\* DVWA → XSS (Reflected)
-
-\- \*\*Test input:\*\* `<script>alert('XSS')</script>`
-
-\- \*\*Observation:\*\* A browser alert appeared, demonstrating that user-supplied JavaScript was executed by the application.
-
-\- \*\*Security impact:\*\* Reflected XSS can execute attacker-controlled scripts in a victim's browser and may enable unauthorized actions or exposure of accessible page data.
-
-\- \*\*Mitigation:\*\* Apply context-aware output encoding, validate and sanitize input where appropriate, and use a suitable Content Security Policy (CSP).
-
-\- \*\*Evidence:\*\* `evidence/xss-reflected.png`
+#### Test 2: Reflected Cross-Site Scripting (XSS)
 
 
 
-\#### Test 3: OS Command Injection
+- **Location:** DVWA → XSS (Reflected)
+
+- **Test input:** `<script>alert('XSS')</script>`
+
+- **Observation:** A browser alert appeared, demonstrating that user-supplied JavaScript was executed by the application.
+
+- **Security impact:** Reflected XSS can execute attacker-controlled scripts in a victim's browser and may enable unauthorized actions or exposure of accessible page data.
+
+- **Mitigation:** Apply context-aware output encoding, validate and sanitize input where appropriate, and use a suitable Content Security Policy (CSP).
+
+- **Evidence:** `evidence/xss-reflected.png`
 
 
 
-\- \*\*Location:\*\* DVWA → Command Injection
-
-\- \*\*Test input:\*\* `127.0.0.1; id`
-
-\- \*\*Observation:\*\* The output included user and group information for `www-data`, demonstrating that the injected operating-system command executed.
-
-\- \*\*Security impact:\*\* Command injection can allow unauthorized commands to run with the privileges of the application process.
-
-\- \*\*Mitigation:\*\* Avoid constructing shell commands from user input, use safe APIs instead of shell execution where possible, strictly validate expected input formats, and run the application with minimal privileges.
-
-\- \*\*Evidence:\*\* `evidence/command-injection.png`
+#### Test 3: OS Command Injection
 
 
 
-\### 5. Evidence
+- **Location:** DVWA → Command Injection
+
+- **Test input:** `127.0.0.1; id`
+
+- **Observation:** The output included user and group information for `www-data`, demonstrating that the injected operating-system command executed.
+
+- **Security impact:** Command injection can allow unauthorized commands to run with the privileges of the application process.
+
+- **Mitigation:** Avoid constructing shell commands from user input, use safe APIs instead of shell execution where possible, strictly validate expected input formats, and run the application with minimal privileges.
+
+- **Evidence:** `evidence/command-injection.png`
+
+
+
+### 5. Evidence
 
 
 
@@ -168,17 +168,17 @@ The `evidence` directory contains screenshots documenting:
 
 
 
-1\. `kubernetes-deployment.png` — Kubernetes Deployment, Pod, and Service status.
+1. `kubernetes-deployment.png` — Kubernetes Deployment, Pod, and Service status.
 
-2\. `sql-injection.png` — SQL Injection input and observed output.
+2. `sql-injection.png` — SQL Injection input and observed output.
 
-3\. `xss-reflected.png` — Reflected XSS demonstration.
+3. `xss-reflected.png` — Reflected XSS demonstration.
 
-4\. `command-injection.png` — Command Injection demonstration.
+4. `command-injection.png` — Command Injection demonstration.
 
 
 
-\### 6. Security Considerations
+### 6. Security Considerations
 
 
 
@@ -190,7 +190,7 @@ The lab illustrates why secure query construction, output encoding, safe process
 
 
 
-\### 7. Conclusion
+### 7. Conclusion
 
 
 
